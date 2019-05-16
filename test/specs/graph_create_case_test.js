@@ -1,10 +1,23 @@
-import PluginAPITester from "../support/plugin_elements/PluginAPITester";
+import Commands from "../helper/common";
+import PluginAPITesterObject from "../elements/PluginApiTesterObject";
 
-const apiTester = new PluginAPITester;
+import * as Papa from 'papaparse'
+
+const apiTester = new PluginAPITesterObject;
+const commands = new Commands;
 const url = "https://codap.concord.org/releases/staging/?di=https://concord-consortium.github.io/codap-data-interactives//DataInteractiveAPITester/index.html",
 // const url = "http://localhost:4020?http://~/eireland/codap-data-interactives/DataInteractiveAPITester/index.html"
-data_filename = "SmokeTestData.csv",
+data_filename = "../helper/SmokeTestData.csv",
 data_context = 'SmokeTestData'; 
+
+async function getData(filename, callBack) {
+    return Papa.parse(filename, {
+        complete: (results)=>{
+                                callBack(results.data)
+        }
+    })
+        .then((data)=>{return data})
+}
 
 function createDataContext(contextName){
     console.log('In createDataContext');
@@ -38,13 +51,6 @@ function createGraph(contextName, graphName, xAttr, yAttr,legendAttr, y2Attr) {
     apiTester.getResponseArea()//get the text response somehow to verify graph got created
 }
 
-function addDataByItem(contextName, item){
-    var message='{"action":"create", "resource":"dataContext['+contextName+'].item","values":[{"Sample": "'+item[0]+'", "YesNo":"'+item[1]+'", "WinLose":"'+item[2]+'", "Height":"'+item[3]+'", "Weight":"'+item[4]+'", "Width":"'+item[5]+'", "Eyes":"'+item[6]+'","NumCat":"'+item[7]+'"}]}'
-
-    apiTester.sendMessage(message);
-    apiTester.getResponseArea()//get the text response somehow to verify data got created
-}
-
 function addDataByCase(contextName,item) {
     var message='{"action":"create", "resource":"dataContext['+contextName+'].collection['+contextName+'].case","values":[{"values":{"Sample": "'+item[0]+'", "YesNo":"'+item[1]+'", "WinLose":"'+item[2]+'", "Height":"'+item[3]+'", "Weight":"'+item[4]+'", "Width":"'+item[5]+'", "Eyes":"'+item[6]+'","NumCat":"'+item[7]+'"}}]}'
 
@@ -54,10 +60,14 @@ function addDataByCase(contextName,item) {
 
 describe('it will test graph creation when data is created by item', ()=>{
     it('will load frame', ()=>{
-        cy.visit(url);
-        cy.getPluginIframe().then(($iframe)=>{
+        let data = this.getData(data_filename);
+        browser.url(url);
+        commands.switchToIframe.then(($iframe)=>{
             createDataContext($iframe, )
         })    
+    })
+    it('will create data by case',()=>{
+        
     })
 
 })

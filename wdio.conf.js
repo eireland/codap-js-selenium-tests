@@ -62,7 +62,9 @@ exports.config = {
             },    
         loggingPrefs: {
             'driver': 'INFO',
-            'browser': 'INFO'
+            'browser': 'ALL'//,
+            // 'driver': 'LOG',
+            // 'browser': 'LOG',
         }    
     }, 
     {

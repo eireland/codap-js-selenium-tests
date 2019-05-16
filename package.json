@@ -5,8 +5,10 @@
   "main": "testSimple.js",
   "dependencies": {
     "chai": "^4.2.0",
+    "csv-parser": "^2.3.0",
     "geckodriver": "^1.16.2",
     "lodash": "^4.17.11",
+    "papaparse": "^4.6.3",
     "webdriverio": "^5.7.12"
   },
   "devDependencies": {
@@ -21,13 +23,13 @@
     "@wdio/sauce-service": "^5.7.8",
     "@wdio/sync": "^5.7.9",
     "chromedriver": "^2.46.0",
-    "mocha": "^6.1.3",
+    "mocha": "^6.1.4",
     "wdio-chromedriver-service": "^5.0.1"
   },
   "scripts": {
     "test": "mocha",
-    "test:wdio":"./node_modules/.bin/wdio wdio.conf.js",
-    "test:wdio-one":"./node_modules/.bin/wdio wdio.conf.js --spec ./test/specs/public_docs_test.js"
+    "test:wdio": "./node_modules/.bin/wdio wdio.conf.js",
+    "test:wdio-one": "./node_modules/.bin/wdio wdio.conf.js --spec ./test/specs/graph_create_item_test.js"
   },
   "keywords": [],
   "author": "",
