@@ -3,16 +3,16 @@ class CfmObject{
         $('.cfm-menu.menu-anchor').click();
     }
     getOpenDocButton(){
-        return $('button*=Open Document')//.contains("Open Document");
+        return $('button*=Open Document')
     }
     getCreateNewDocButton(){
         return 'button*=Create New Document'
     }
     getOpenExampleTab(){
-        return $('.workspace-tabs').contains('Example Documents')
+        return $('li*=Example Documents')
     }
     getOpenGoogleDocTab(){
-
+        return $('li*=Google Drive')
     }
     getOpenLocalFileTab(){
         return $('li*=Local File')
