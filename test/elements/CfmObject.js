@@ -6,7 +6,7 @@ class CfmObject{
         return $('button*=Open Document')//.contains("Open Document");
     }
     getCreateNewDocButton(){
-        
+        return 'button*=Create New Document'
     }
     getOpenExampleTab(){
         return $('.workspace-tabs').contains('Example Documents')
@@ -15,11 +15,13 @@ class CfmObject{
 
     }
     getOpenLocalFileTab(){
-        return $('.workspace-tabs ul:nth-child(3) li')//.contains('Local File')
-        //return $('.workspace-tabs li*=Local File')//.contains('Local File')
+        return $('li*=Local File')
     }
     getFileSelectionDropArea(){
         return $('.dropArea input');
+    }
+    createNewDocument(){
+        $(this.getCreateNewDocButton()).click();
     }
     openDocFromModal(){
         this.getOpenDocButton().click();
@@ -35,12 +37,10 @@ class CfmObject{
     }
     openLocalDoc(filename){
         // const fp=browser.uploadFile(filename)
-        browser.pause(2000);
+        browser.pause(1000);
         this.getOpenLocalFileTab().click();
-        this.getFileSelectionDropArea().click();//.parent().click();
-        browser.uploadFile(filename)
-        browser.chooseFile(this.getFileSelectionDropArea(), filename)
-        // this.getFileSelectionDropArea().setValue(fp);
+        browser.pause(1000);
+        this.getFileSelectionDropArea().setValue(filename);
         browser.pause(3000);
     }
     closeConfirmDialogMessage(){
