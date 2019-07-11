@@ -25,7 +25,7 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
-        // './test/specs/**/testSimple.js'
+        './test/specs/**/testSimple.js'
     ],
     //
     // ============
@@ -58,11 +58,11 @@ exports.config = {
         browserName: 'chrome',
         screenResolution: "1280x1024",
             'goog:chromeOptions': {
-                args: [ '--start-maximized', '--start-fullscreen'],
+                args: [ '--start-maximized'],
             },    
         loggingPrefs: {
             'driver': 'INFO',
-            'browser': 'ALL'//,
+            'browser': 'INFO'//,
             // 'driver': 'LOG',
             // 'browser': 'LOG',
         }    
@@ -89,7 +89,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'trace',
+    logLevel: 'debug',
     //
     // Set specific log levels per logger
     // loggers:
@@ -191,6 +191,8 @@ exports.config = {
     // },
     before: function() {
         var chai = require('chai');
+        var chaiWebdriver = require('chai-webdriverio').default;
+        chai.use(chaiWebdriver(browser));
         global.expect = chai.expect;
         chai.Should();
     }
