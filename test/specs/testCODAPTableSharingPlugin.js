@@ -76,10 +76,11 @@ describe('Test Table Sharing plugin in CODAP', () => {
     it('verify Name attribute has 2 cases with the 2 user names in the correct order', ()=>{
         //currently, user who owns the table is the last case in the Names attribute
         var tableCells = $$('.slick-cell.l1.r1');
-
-        // expect((tableCells[0]).getText()).to.eq(user1);ß
         expect((tableCells[0]).getText()).to.eq(user1);
-        // expect((tableCells[6]).getText()).to.eq(user1);
         expect((tableCells[3]).getText()).to.eq(user2);
+    })
+    it('verify both tables have Data collection with NewAttribute attribute', ()=>{
+        expect($$(table.getCollectionName('Data'))).to.have.length(2)
+        expect($$(table.getAttribute('NewAttribute'))).to.have.length(2);
     })
 });

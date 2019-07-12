@@ -31,7 +31,7 @@
   "scripts": {
     "test": "mocha",
     "test:wdio": "./node_modules/.bin/wdio wdio.conf.js",
-    "test:wdio-one": "./node_modules/.bin/wdio wdio.conf.js --spec ./test/specs/testSharingwithPlugin.js"
+    "test:wdio-one": "./node_modules/.bin/wdio wdio.conf.js --spec ./test/specs/testCODAPTableSharingPlugin.js"
   },
   "keywords": [],
   "author": "",

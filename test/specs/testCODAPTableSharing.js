@@ -57,8 +57,6 @@ describe('Test Collaborators collection', () => { //Test to verify there are 2 t
     var collection="Collaborators (1 cases)";
     it('verify that ghost row in Name attribute is not visible', ()=>{
         var line1 = 1,row1=1; //line and row are by parent group
-        var line0=0, row0=0;
-        // var collabCollections=$$('.dg-case-table-view')
         var collabCollections=$$('.dg-case-table-view')
         var collabCollectionTitle=$('.dg-case-table-title*=' + collection)
         expect($$(table.getTableCells(line1, row1)).length).to.eq(6);
@@ -105,19 +103,22 @@ describe('Test Collaborators collection', () => { //Test to verify there are 2 t
         $(table.getAttribute('Name')).click();
         $('//span[contains(text(),"Edit Attribute Properties")]').click();
         expect($('//div[contains(text(),"name")]/following-sibling::div[contains(@class,"sc-text-field-view")]/div[2]/input').getAttribute('disabled')).to.eq('true');
+        $('label*=Cancel').click();
     })
-    it("verify that user cannot edit other collaborators' names", ()=>{
-
-    })
-    it("verify can edit own name", ()=>{
-
+    it("verify that user cannot edit names", ()=>{
+        //cells do not have .editable class
+        var tableCells = $$('.slick-cell.l1.r1');
+        tableCells[0].click();
+        expect((tableCells[0]).getAttribute('class')).to.not.include('editable');
+        tableCells[3].click();
+        expect((tableCells[3]).getAttribute('class')).to.not.include('editable');
     })
 })
 
 describe('Test child collection',()=>{
-    it('verify child collection is created', ()=>{
-
-    })
+    before{
+        //Add some cases to the Data collection
+    }
     it('verify there is one attribute per user created',()=>{
 
     })
