@@ -1,12 +1,34 @@
+import HelperCommands from "../helper/common";
+
+const helper = new HelperCommands;
+
 class TableTileObject{
     getCaseTableTile(){
-        return $('.dg-case-table-view');
+        return ('.dg-hier-table-view');
     }
-    getAttributeHeader(){
-        return $('.slick-column-name .two-line-header-line-1')
+    getTableTitleBar(){
+        return ('.dg-case-table-component-view .dg-titlebar')
+    }
+    getSelectedTableTitleBar(){
+        return ('.dg-case-table-component-view .dg-titlebar-selected')
+    }
+    getCollection(){
+        return ('.dg-case-table-title')
+    }
+    getAttributeHeaders(){
+        return ('.slick-column-name .two-line-header-line-1')
+    }
+    getCaseCardIcon(){
+        return ('.dg-card-icon')
+    }
+    getTableIcon(){
+        return ('.dg-table-icon')
+    }
+    getAddNewAttributePlusIcon(collection){
+        return ('//div[contains(text(),"'+collection+'")]/following-sibling::canvas[contains(@class,"dg-floating-plus")]')
     }
     getAttribute(name){
-        return $('.two-line-header-line-1='+name);
+        return ('.two-line-header-line-1*='+name);
     }
     changeToCaseCard(){
         $('.dg-card-icon').click();
@@ -14,15 +36,16 @@ class TableTileObject{
     changeToTable(){
         $('.dg-table-icon').click();
     }
-    addNewAttribute(collection, attribute){
+    addNewAttributeWithPlusIcon(collection, attribute){
         //Have to find the appropriate collection. Plus is sibling canvas.dg-floating-plus to the title div.dg-case-table-title
         $('.dg-case-table-title*='+collection).moveTo();
-        $('.dg-case-table-title*='+collection).siblings('canvas.dg-floating-plus').click();
+        $(this.getAddNewAttributePlusIcon(collection)).click();
         // $('.dg-floating-plus').click();
     }
+
     getCollectionName(collection){
         // $('.dg-case-table-title').contains(collection);
-        $('.dg-case-table-title*='+collection);
+        return ('.dg-case-table-title*='+collection)
     }
     getIndexCell(){
         return $('.dg-index') //<span> with index text
@@ -33,9 +56,36 @@ class TableTileObject{
         //get the child .slick-cell of the found .dg-case-table
     }
     //Ruler options
+    getRulerToolPalette(){
+        return ('.dg-table-attributes');
+    }
     addNewAttributeInRuler(collection){
-        clickMenuItem('New Attribute in '+ collection);
+        $(this.getRulerToolPalette()).click();
+        browser.pause(1000)
+        helper.clickMenuItem('New Attribute in '+ collection);
     }
 
+    //Index menu
+    getIndexMenu(){
+        return $('.dg-case-index-popup')
+    }
+    openIndexMenu(index_num){ //currently only opens the last occurence of that index number. Index nums are in an array of all indexes, not separated by collection
+        //Ideally, get collection to know which index num in the array to click on
+        //click on index num
+        $('.dg-index').then(($index_arr)=>{
+            $index_arr[index_num].click();
+        })
+    }
+    getTableCells(line,row){
+        return ('.slick-cell.l'+line+'.r'+row)
+    }
+
+    enterData(attribute, data, line, row){
+        console.log('in enterData');
+        // var cell = $(this.getTableCells(line,row)).last();
+        var cells = $$('.l1.r1');
+        cells[cells.length-1].doubleClick();
+        $('.l1.r1 input:last-child').setValue(data + '\uE007')
+    }
 }
 export default TableTileObject

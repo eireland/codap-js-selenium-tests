@@ -22,6 +22,8 @@
     "@wdio/mocha-framework": "^5.7.13",
     "@wdio/sauce-service": "^5.7.8",
     "@wdio/sync": "^5.7.9",
+    "chai-jquery": "^2.1.0",
+    "chai-webdriverio": "^1.0.0",
     "chromedriver": "^2.46.0",
     "mocha": "^6.1.4",
     "wdio-chromedriver-service": "^5.0.1"
@@ -29,7 +31,7 @@
   "scripts": {
     "test": "mocha",
     "test:wdio": "./node_modules/.bin/wdio wdio.conf.js",
-    "test:wdio-one": "./node_modules/.bin/wdio wdio.conf.js --spec ./test/specs/graph_create_item_test.js"
+    "test:wdio-one": "./node_modules/.bin/wdio wdio.conf.js --spec ./test/specs/testSharingwithPlugin.js"
   },
   "keywords": [],
   "author": "",

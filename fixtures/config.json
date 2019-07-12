@@ -1,0 +1,4 @@
+{
+    "homeDir": "process.env['HOME']",
+    "projectDir": "/development/table-sharing-plugin-js-selenium-test/" 
+}

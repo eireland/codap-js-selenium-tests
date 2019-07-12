@@ -17,8 +17,9 @@ class CodapObject{
     }
     closeTile(){
         console.log("in closeTile");
-        console.log('found close icon: '+ $('.dg-close-icon').last() );
-        $('.dg-close-icon').last().moveTo().click();
+        var closeIconsArr=$$('.dg-close-icon')
+        console.log('found last close icon: '+ closeIconsArr[closeIconsArr.length-1] );
+        (closeIconsArr[closeIconsArr.length-1]).moveTo().click();
         // browser.buttonDown();
         // browser.buttonUp();
     }
