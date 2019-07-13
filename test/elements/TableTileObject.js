@@ -80,12 +80,12 @@ class TableTileObject{
         return ('.slick-cell.l'+line+'.r'+row)
     }
 
-    enterData(attribute, data, line, row){
+    enterData(cell, data){
         console.log('in enterData');
-        // var cell = $(this.getTableCells(line,row)).last();
-        var cells = $$('.l1.r1');
-        cells[cells.length-1].doubleClick();
-        $('.l1.r1 input:last-child').setValue(data + '\uE007')
+        var inputCell = $('.dg-editor-text')
+        cell.doubleClick();
+        browser.pause(1000)
+        inputCell.setValue(data + '\uE007')
     }
 }
 export default TableTileObject

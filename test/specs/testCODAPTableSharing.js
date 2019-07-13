@@ -1,6 +1,10 @@
 // This is to test the shared table functionalities
 // This assumes that the plugin has created the collaboration properly
 // 
+// Table column/row setup is:
+// div[index] is the row in the table for each collection
+// div[containst(@class,'lx rx')] where x is the column in div[index]
+
 import PluginObject from '../elements/TableSharingPlugin.js';
 import TableTile from '../elements/TableTileObject.js';
 import HelperCommands from '../helper/common'
@@ -115,11 +119,55 @@ describe('Test Collaborators collection', () => { //Test to verify there are 2 t
     })
 })
 
-describe('Test child collection',()=>{
-    before{
-        //Add some cases to the Data collection
-    }
-    it('verify there is one attribute per user created',()=>{
+describe.only('Test child collection',()=>{
+    it('verify data can be added manually to user2 and will appear in user1 table', ()=>{
+        ////div[contains(@title,"NewAttribute")]/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div[1]/div[contains(@class,"r1")]
+        var attribute = 'NewAttribute';
+        var data1 = ['Dopey', 'Doc', "Sneezy"];
+        var header_el='//div[contains(@title,"'+attribute+'")]';
+        var index = 1; // indicates the div the row is in 
+        var x = 1; // indicates which cell it is
+        var row_el='', cells='';
+        var cell_el= '/div[contains(@class,"r'+x+'")]'
+
+        for (index=1;index<=data1.length;index++){
+            row_el = '/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div['+index+']'
+            cells = $$(header_el+row_el+cell_el)
+            table.enterData(cells[1], data1[index-1]);
+            browser.pause(3000)
+            expect((cells[1]).getAttribute('title')).to.eq(data1[index-1])
+            expect((cells[0]).getAttribute('title')).to.eq(data1[index-1])
+        }  
+        browser.pause(3000);
+    })
+    it('verify data can be added manually to user1 and will appear in user2 table', ()=>{
+        ////div[contains(@title,"NewAttribute")]/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div[1]/div[contains(@class,"r1")]
+        var attribute = 'NewAttribute';
+        var data2 = ['Sleepy', 'Grumpy']
+        var header_el='//div[contains(@title,"'+attribute+'")]';
+        var index = 4; // indicates the div the row is in 
+        var x = 1; // indicates which cell it is
+        var row_el='', cells='';
+        var cell_el= '/div[contains(@class,"r'+x+'")]';
+        var user2Row_el='',user2Cells='';
+
+        for (index=4;index<=data2.length+3;index++){
+            console.log('index: '+index)
+            row_el = '/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div['+index+']'
+            user2Row_el = '/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div['+(index-3)+']'
+            user2Cells = $$(header_el+user2Row_el+cell_el)
+            console.log('xpath is: '+header_el+user2Row_el+cell_el)
+            cells = $$(header_el+row_el+cell_el)
+            console.log('found cells: '+user2Cells.length);
+            table.enterData(cells[0], data2[index-4]);
+            browser.pause(3000)
+            expect((cells[0]).getAttribute('title')).to.eq(data2[index-4]);
+            // expect((user2Cells[1]).getAttribute('title')).to.eq(data2[index-4])
+        }  
+        browser.pause(3000);
+    })
+    it('verify there is still one attribute in the Data Collection',()=>{
+        //verifies that a new attribute is not created when the data is shared
 
     })
     it("verify user1 cannot edit user2's case",()=>{
@@ -131,4 +179,11 @@ describe('Test child collection',()=>{
     it("verify user1 cannot delete user2 cases", ()=>{
 
     })
+    it('will verify that an attribute can be added to the Data collection',()=>{ //this cannot be done with TableSharing2.codap doc
+
+    })
+    it('verify that attributes can be reordered, and new data added to the correct attribute across all shared table',()=>{
+
+    })
+    it('verify attribute can be renamed, rename is propagated to across all shared tables, and new data added to the correct attribute')
 })
