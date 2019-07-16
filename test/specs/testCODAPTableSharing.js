@@ -155,14 +155,12 @@ describe.only('Test child collection',()=>{
             console.log('index: '+index)
             row_el = '/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div['+index+']'
             user2Row_el = '/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div['+(index-3)+']'
-            user2Cells = $$(header_el+user2Row_el+cell_el)
-            console.log('xpath is: '+header_el+user2Row_el+cell_el)
             cells = $$(header_el+row_el+cell_el)
-            console.log('found cells: '+user2Cells.length);
             table.enterData(cells[0], data2[index-4]);
             browser.pause(3000)
+            user2Cells = $$(header_el+user2Row_el+cell_el)
             expect((cells[0]).getAttribute('title')).to.eq(data2[index-4]);
-            // expect((user2Cells[1]).getAttribute('title')).to.eq(data2[index-4])
+            expect((user2Cells[1]).getAttribute('title')).to.eq(data2[index-4])
         }  
         browser.pause(3000);
     })
