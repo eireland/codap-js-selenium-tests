@@ -157,16 +157,21 @@ describe.only('Test child collection',()=>{
             user2Row_el = '/../../following-sibling::div[contains(@class,"slick-viewport")]/div/div['+(index-3)+']'
             cells = $$(header_el+row_el+cell_el)
             table.enterData(cells[0], data2[index-4]);
-            browser.pause(3000)
+            browser.pause(2000)
             user2Cells = $$(header_el+user2Row_el+cell_el)
             expect((cells[0]).getAttribute('title')).to.eq(data2[index-4]);
             expect((user2Cells[1]).getAttribute('title')).to.eq(data2[index-4])
         }  
-        browser.pause(3000);
+        browser.pause(1000);
     })
     it('verify there is still one attribute in the Data Collection',()=>{
         //verifies that a new attribute is not created when the data is shared
-
+        var headers= $$('//div[contains(text(),"Data (5 cases)")]/following-sibling::div[contains(@class,"dg-case-table")]/div/div[contains(@class,"slick-header-columns")]/div[contains(@class,"slick-header-column")]')
+        expect(headers.length).to.eq(4);
+        expect(headers[0].getText()).to.eq('index');
+        expect(headers[1].getText()).to.eq('NewAttribute');
+        expect(headers[2].getText()).to.eq('index');
+        expect(headers[3].getText()).to.eq('NewAttribute');
     })
     it("verify user1 cannot edit user2's case",()=>{
 
