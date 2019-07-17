@@ -28,11 +28,11 @@ class CfmObject{
     }
     openDocFromFileMenu(){
         this.openCFMMenu();
-        $('.cfm-menu .menuItem*=Open...').click();//.contains('Open...').click();
+        $('.menuItem*=Open...').click();//.contains('Open...').click();
     }
     openExampleDoc(document){
         this.getOpenExampleTab().click();
-        $('.filelist .selectable*='+document).click()//.contains(document).click();
+        $('.selectable*='+document).click()//.contains(document).click();
         $('button*=Open').click()//.contains('Open').click();
     }
     openLocalDoc(filename){
@@ -44,7 +44,11 @@ class CfmObject{
         browser.pause(3000);
     }
     closeConfirmDialogMessage(){
-        $('.confirm-dialog button').contains('Yes').click();
+        $('button*=Yes').click();
+    }
+    closeDocument(){
+        this.openCFMMenu();
+        $('.menuItem*=Close').click();
     }
 }
 export default CfmObject;

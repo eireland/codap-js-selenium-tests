@@ -30,6 +30,9 @@ class TableTileObject{
     getAttribute(name){
         return ('.two-line-header-line-1*='+name);
     }
+    getHeadersInCollection(collection) {
+        return ('//div[contains(text(),"'+collection+'")]/following-sibling::div[contains(@class,"dg-case-table")]/div/div[contains(@class,"slick-header-columns")]/div[contains(@class,"slick-header-column")]')
+    }
     changeToCaseCard(){
         $('.dg-card-icon').click();
     }
