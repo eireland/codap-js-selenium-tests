@@ -12,7 +12,7 @@ const dateTimeFilePath=homeDir+'/development/codap-js-selenium-tests/fixtures/da
 context('Open a local file', ()=>{
     beforeEach(()=>{
         browser.url(CODAP_URL);
-        browser.pause(3000);
+        browser.pause(3000); 
     })
     it('will open a TypesErrorSampleDoc file in CODAP', ()=>{
         cfm.openDocFromModal();
